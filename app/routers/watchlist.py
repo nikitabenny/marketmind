@@ -1,18 +1,13 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
-from typing import Optional
+from app.schemas import Ticker
+from datetime import datetime
 
 router = APIRouter()
 
-class Ticker (BaseModel):
-    name: str
-    note: Optional [str]
-    date: str
-    price: float
 
 watchlist = { "AAPL": {
               "note": "Buy below 160", 
-              "date": "2024-06-10",
+              "date": datetime(2025, 6, 10, hour=11, minute=30),
               "price" : 78.99}
               }
 
@@ -34,7 +29,7 @@ def add_ticker(tck: Ticker):
               
     
 @router.delete('/remove-ticker/{ticker}')
-def remove_ticker(tck : Ticker):
+def remove_ticker(tck : str):
     if tck in watchlist:
         del watchlist[tck]
         return {"message": f"{tck} removed."}
@@ -42,22 +37,22 @@ def remove_ticker(tck : Ticker):
 
 #note handling
 @router.post('/add-note/{ticker}')
-def add_note(note : str, tck: Ticker):
+def add_note(note : str, tck: str):
     if tck in watchlist:
         watchlist[tck]["note"] = note
         return {"message": "Note added"}
     return {"error": "Ticker not found."}
 
 @router.delete('/remove-note/{ticker}')
-def remove_note(tck: Ticker):
+def remove_note(tck: str):
     if tck in watchlist and "note" in watchlist[tck]:
         del watchlist[tck]["note"]
         return {"message": "Note removed"}
     return {"error": "Note or ticker not found."}
 
 @router.put('/update-note/{ticker}')
-def update_note(tck: Ticker, new_note: str):
-    if tck in watchlist:
+def update_note(tck: str, new_note: str):
+    if tck in watchlist and watchlist[tck]["note"] == "":
         watchlist[tck]["note"] = new_note
         return {"message": "Note updated"}
-    return {"error": "Ticker not found."}
+    return {"error": "Bad Request"}
