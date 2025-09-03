@@ -25,8 +25,7 @@ def add_ticker(tck: Ticker):
               "price" : tck.price
               }
     
-    {"message": f"{tck.name} added to watchlist."}
-              
+    return {"message": f"{tck.name} added to watchlist."}
     
 @router.delete('/remove-ticker/{ticker}')
 def remove_ticker(tck : str):

@@ -37,3 +37,4 @@ class Holding(Base):
 
     owner = relationship("User", back_populates="holdings")
     stock = relationship("Stock")
+
