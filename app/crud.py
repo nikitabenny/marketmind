@@ -1,4 +1,4 @@
-from models import User, Stock, Watchlist, Holding
+from app.data.models import User, Stock, Watchlist, Holding
 from typing import List, Optional
 from sqlalchemy.orm import Session
 
@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 
 # crud_stock.py
 from sqlalchemy.orm import Session
-from models import Stock
+from app.data.models import Stock
 from typing import List, Optional
 
 # ===== GET OPERATIONS =====
