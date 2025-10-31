@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from app.routers import watchlist,news,sentiment
-from app.data.database import SessionLocal, engine
+from app.data import database
 from app.data import models
 
 app = FastAPI()
@@ -12,12 +12,15 @@ app.include_router(sentiment.router, prefix="/sentiment")
 
 
 def get_db():
-    db = SessionLocal()
+    db = database.SessionLocal()
     try:
         yield db
     finally:
         db.close()
 
+@app.get("/")
+def get_root():
+    return "Welcome to Niki's first site"
 
 @app.get("/stocks")
 def get_stocks(db: Session = Depends(get_db)):
@@ -30,9 +33,3 @@ def get_stock(ticker: str, db: Session = Depends(get_db)):
     if not stock:
         return {"error": "Stock not found"}
     return {"Symbol": stock.ticker, "Name": stock.name, "Price": stock.price}
-
-
-
-
-
-

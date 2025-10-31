@@ -20,6 +20,7 @@ def get_history(tickers, startDate, endDate):
     return history
 
 
+
 Base.metadata.create_all(bind=engine)
 
 # Load data

@@ -1,57 +1,91 @@
-from fastapi import APIRouter
-from app.schemas import Ticker
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
 from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel
 
-router = APIRouter()
+from app.data.database import SessionLocal
+from app.data.models import Watchlist
 
+router = APIRouter(prefix="/watchlist", tags=["Watchlist"])
 
-watchlist = { "AAPL": {
-              "note": "Buy below 160", 
-              "date": datetime(2025, 6, 10, hour=11, minute=30),
-              "price" : 78.99}
-              }
+# -----------------------------
+# Schemas
+# -----------------------------
+class Ticker(BaseModel):
+    symbol: str
+    note: Optional[str] = ""
+    date: Optional[datetime] = None
+    price: Optional[float] = None
 
+class NoteUpdate(BaseModel):
+    note: str
 
-#return all tickers
-@router.get('/')
-def root():
-    return watchlist
+# -----------------------------
+# DB dependency
+# -----------------------------
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-@router.post('/add-ticker/{ticker}')
-def add_ticker(tck: Ticker):
-    watchlist[tck.name] = {
-              "note": tck.note,
-              "date": tck.date,
-              "price" : tck.price
-              }
+# -----------------------------
+# Routes
+# -----------------------------
+
+# 1. Get all tickers
+@router.get("/", response_model=list[Ticker])
+def get_watchlist(db: Session = Depends(get_db)):
+    return db.query(Watchlist).all()
+
+# 2. Add a ticker
+@router.post("/add-ticker/")
+def add_ticker(tck: Ticker, db: Session = Depends(get_db)):
+    db_ticker = db.query(Watchlist).filter(Watchlist.symbol == tck.symbol.upper()).first()
+    if db_ticker:
+        raise HTTPException(status_code=400, detail="Ticker already exists.")
     
-    return {"message": f"{tck.name} added to watchlist."}
-    
-@router.delete('/remove-ticker/{ticker}')
-def remove_ticker(tck : str):
-    if tck in watchlist:
-        del watchlist[tck]
-        return {"message": f"{tck} removed."}
-    return {"error": "Ticker not found."}
+    new_ticker = Watchlist(
+        symbol=tck.symbol.upper(),
+        note=tck.note,
+        date=tck.date or datetime.utcnow(),
+        price=tck.price
+    )
+    db.add(new_ticker)
+    db.commit()
+    db.refresh(new_ticker)
+    return {"message": f"{tck.symbol.upper()} added to watchlist."}
 
-#note handling
-@router.post('/add-note/{ticker}')
-def add_note(note : str, tck: str):
-    if tck in watchlist:
-        watchlist[tck]["note"] = note
-        return {"message": "Note added"}
-    return {"error": "Ticker not found."}
+# 3. Remove a ticker
+@router.delete("/remove-ticker/{symbol}")
+def remove_ticker(symbol: str, db: Session = Depends(get_db)):
+    db_ticker = db.query(Watchlist).filter(Watchlist.symbol == symbol.upper()).first()
+    if not db_ticker:
+        raise HTTPException(status_code=404, detail="Ticker not found.")
+    db.delete(db_ticker)
+    db.commit()
+    return {"message": f"{symbol.upper()} removed from watchlist."}
 
-@router.delete('/remove-note/{ticker}')
-def remove_note(tck: str):
-    if tck in watchlist and "note" in watchlist[tck]:
-        del watchlist[tck]["note"]
-        return {"message": "Note removed"}
-    return {"error": "Note or ticker not found."}
+# 4. Add/update note
+@router.put("/note/{symbol}")
+def add_or_update_note(symbol: str, note_data: NoteUpdate, db: Session = Depends(get_db)):
+    db_ticker = db.query(Watchlist).filter(Watchlist.symbol == symbol.upper()).first()
+    if not db_ticker:
+        raise HTTPException(status_code=404, detail="Ticker not found.")
+    db_ticker.note = note_data.note
+    db.commit()
+    db.refresh(db_ticker)
+    return {"message": "Note added/updated."}
 
-@router.put('/update-note/{ticker}')
-def update_note(tck: str, new_note: str):
-    if tck in watchlist and watchlist[tck]["note"] == "":
-        watchlist[tck]["note"] = new_note
-        return {"message": "Note updated"}
-    return {"error": "Bad Request"}
+# 5. Remove note
+@router.delete("/note/{symbol}")
+def remove_note(symbol: str, db: Session = Depends(get_db)):
+    db_ticker = db.query(Watchlist).filter(Watchlist.symbol == symbol.upper()).first()
+    if not db_ticker:
+        raise HTTPException(status_code=404, detail="Ticker not found.")
+    db_ticker.note = ""
+    db.commit()
+    db.refresh(db_ticker)
+    return {"message": "Note removed."}
