@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.routers import watchlist,news,sentiment
 from app.data import database
 from app.data import models
+from app.background.price_updater import update_price
 
 app = FastAPI()
 
@@ -27,9 +28,9 @@ def get_stocks(db: Session = Depends(get_db)):
     stocks = db.query(models.Stock).limit(10).all()
     return [{"Symbol": s.ticker, "Name": s.name, "Price": s.price} for s in stocks]
 
-@app.get("/stock/{symbol}")
+@app.get("/stock/{ticker}")
 def get_stock(ticker: str, db: Session = Depends(get_db)):
-    stock = db.query(models.Stock).filter(models.Stock.ticker == ticker).first()
+    stock = update_price(db=db, ticker_in=ticker)
     if not stock:
         return {"error": "Stock not found"}
     return {"Symbol": stock.ticker, "Name": stock.name, "Price": stock.price}
