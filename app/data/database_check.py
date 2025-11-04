@@ -1,5 +1,5 @@
-from database import SessionLocal
-from models import Stock
+from app.data.database import SessionLocal
+from app.data.models import Stock
 from sqlalchemy import func
 
 
