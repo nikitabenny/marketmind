@@ -37,6 +37,7 @@ img{
 }
 
 .logo a {
+    font-family: 'Karla';
     display: flex;           /* horizontal layout */
     align-items: center;     /* vertically centers image and text */
     gap: 10px;               /* space between logo and text */
@@ -81,6 +82,7 @@ img{
 }
 
 .nav-links a {
+    font-family: 'Karla';
     padding: 10px 15px;
     display: block;
     font-weight: 600;
@@ -105,7 +107,6 @@ img{
     text-align: center;
     padding: 0 20px;
     color: #fff;
-    background-image: url('../images/image1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -135,6 +136,7 @@ img{
     color: #fff;
     text-decoration: none;
     transition: 0.3s ease;
+    font-family: 'Karla';
 }
 
 .btn-hero:hover {

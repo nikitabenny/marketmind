@@ -10,7 +10,26 @@ def get_nas(path = 'app/data/nasdaq-listed.csv'):
     nasdaq_df = pd.read_csv(path)
     
     return nasdaq_df
-    
+
+#return json object with newest news on ticker
+def get_recent(ticker):
+    cleaned_news = []
+
+    for news in ticker.news:
+        cleaned_news.append( 
+            {
+                "title": news["content"].get("title", None),
+                "summary": news["content"].get("summary", None)
+            }
+        )
+
+    return cleaned_news
+
+
+msft = yf.Ticker("MSFT")
+
+
+get_recent(msft)
 
 # #retrieve historical data for given stocks
 # def get_history(tickers, startDate, endDate):
