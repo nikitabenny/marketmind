@@ -28,7 +28,7 @@ tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
 model = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert")
 
 
-router = APIRouter(prefix="/sentiment", tags=["Sentiment"])
+router = APIRouter(prefix="", tags=["Sentiment"])
 
 
 
@@ -110,5 +110,5 @@ def get_news(symbol):
       cleaned_news.append(summary)
 
   return{
-    "news " : cleaned_news
+    "news" : cleaned_news
   }

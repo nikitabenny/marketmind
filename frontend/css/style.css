@@ -37,7 +37,7 @@ img{
 }
 
 .logo a {
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
     display: flex;           /* horizontal layout */
     align-items: center;     /* vertically centers image and text */
     gap: 10px;               /* space between logo and text */
@@ -62,11 +62,10 @@ img{
     max-width: 100%;
     padding: 0 20px;
 }
-
 .nav-content {
     display: flex;
     justify-content: space-between;
-    align-items: right;
+    align-items: center;
 }
 
 
@@ -82,7 +81,7 @@ img{
 }
 
 .nav-links a {
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
     padding: 10px 15px;
     display: block;
     font-weight: 600;
@@ -144,7 +143,7 @@ img{
     max-width: 750px;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'Karla'
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .btn-hero {
@@ -155,7 +154,7 @@ img{
     color: #fff;
     text-decoration: none;
     transition: 0.3s ease;
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .btn-hero:hover {

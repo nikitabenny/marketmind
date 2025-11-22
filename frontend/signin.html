@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - MarketMind</title>
+    <link rel="stylesheet" href="css/sign_in.css" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
+
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="myVideo">
+        <source src="videos/option3.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="index.html">
+                  <img src="images/logo-t2.png" alt="MarketMind Logo" class="logo-img" />
+                  MarketMind
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="btn-log-in" href="index.html">Features</a></li>
+                <li><a class="btn-log_in" href="signup.html"><i> </i> Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero / Signup -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome Back To MarketMind</h1>
+        </div>
+
+        <form action="/signup" method="POST" class="signup-form">
+
+            <input type="email" class="email-btn" placeholder="Email" required>
+            <input type="password" class="pws-btn" placeholder="Password" required>
+            <button class="btn" type="submit">Sign In</button>
+        </form>
+    </section>
+
+</body>
+</html>

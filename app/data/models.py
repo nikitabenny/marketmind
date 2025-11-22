@@ -7,6 +7,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
+    password = Column(String)
 
     # relationships- back_populates allows the two classes to sync
     watchlists = relationship("Watchlist", back_populates="owner")

@@ -21,7 +21,7 @@ def get_db():
 
 @app.get("/")
 def get_root():
-    return "Welcome to Niki's first site"
+    return "Niki's site"
 
 @app.get("/stocks")
 def get_stocks(db: Session = Depends(get_db)):
@@ -34,3 +34,4 @@ def get_stock(ticker: str, db: Session = Depends(get_db)):
     if not stock:
         return {"error": "Stock not found"}
     return {"Symbol": stock.ticker, "Name": stock.name, "Price": stock.price}
+

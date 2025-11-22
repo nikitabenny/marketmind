@@ -1,3 +1,10 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
 body{
     font-family: 'imb';
     font-size : 15px;
@@ -41,7 +48,7 @@ a:hover {
 }
 
 .logo a {
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
     display: flex;           /* horizontal layout */
     align-items: center;     /* vertically centers image and text */
     gap: 10px;               /* space between logo and text */
@@ -70,7 +77,7 @@ a:hover {
 .nav-content {
     display: flex;
     justify-content: space-between;
-    align-items: right;
+    align-items: center;
 }
 
 
@@ -86,7 +93,7 @@ a:hover {
 }
 
 .nav-links a {
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
     padding: 10px 15px;
     display: block;
     font-weight: 600;
@@ -110,7 +117,7 @@ a:hover {
     color: #fff;
     text-decoration: none;
     transition: 0.3s ease;
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .btn:hover{
@@ -124,7 +131,7 @@ a:hover {
     justify-content: flex-start;   /* move content near top */
     align-items: center;           /* center horizontally */
     padding-top: 40px;             /* adjust vertical spacing */
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
     color:#e0e0e0
 
 }
@@ -150,10 +157,10 @@ a:hover {
     font-size: 16px;
     border-radius: 8px;
     border: 1px solid #0b0a0a;
-    background-color: #544d4d;
+    background-color: #4a4a4a;
     outline: none;
     transition: border 0.2s ease, background-color 0.2s ease;
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .name-input:focus {
@@ -172,11 +179,15 @@ a:hover {
     font-size: 16px;
     border-radius: 8px;
     border: 1px solid #0f0e0e;
-    background-color: #544d4d;
+    background-color: #4a4a4a;
     outline: none;
     transition: border 0.2s ease, background-color 0.2s ease;
-    font-family: 'Karla';
+    font-family: 'Space Grotesk', sans-serif;
     fill-opacity: 0.5
+}
+.signup-form {
+    width: 100%;
+    max-width: 400px;
 }
 
 .signup-form button {
@@ -187,6 +198,7 @@ a:hover {
     border-radius: 8px;
     border: none;
     cursor: pointer;
+    background-color: #9f9b9b
 }
 
 input, button {
