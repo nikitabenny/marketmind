@@ -1,0 +1,194 @@
+body{
+    font-family: 'imb';
+    font-size : 15px;
+    line-height: 1.5;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000000;
+    background-attachment: scroll;
+}
+a {
+    text-decoration: none; /* removes underline */
+}
+
+a:hover {
+    text-decoration: none; /* ensures hover doesn’t add underline */
+}
+
+#myVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ensures full coverage */
+    z-index: -1;       /* behind all content */
+}
+
+.signup-form input,
+.signup-form .email-btn,
+.signup-form .pws-btn {
+    color: #fff; /* white text for readability */
+}
+
+
+.logo{
+    padding: 10px 15px;
+    display: block;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.logo a {
+    font-family: 'Karla';
+    display: flex;           /* horizontal layout */
+    align-items: center;     /* vertically centers image and text */
+    gap: 10px;               /* space between logo and text */
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+}
+
+
+.logo-img{
+    height: 20px;            /* adjust logo height as needed */
+    width: auto;             /* maintain aspect ratio */
+}
+
+/* NAVBAR BASE */
+.navbar {
+    padding: 20px 0;
+}
+
+.navbar .container {
+    margin: 0;
+    max-width: 100%;
+    padding: 0 20px;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+}
+
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    font-family: 'Karla';
+    padding: 10px 15px;
+    display: block;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+    background: #ffffff33;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+
+.btn{
+    background: #ffffff33;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-family: 'Karla';
+}
+
+.btn:hover{
+    background: #ffffff55;
+}
+
+.hero {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;   /* move content near top */
+    align-items: center;           /* center horizontally */
+    padding-top: 40px;             /* adjust vertical spacing */
+    font-family: 'Karla';
+    color:#e0e0e0
+
+}
+
+.signup-form {
+    margin-top: 40px;              /* spacing between hero text and form */
+}
+
+.name-row {
+    display: flex;
+    justify-content: space-between; /* keeps gap between inputs */
+    width: 100%;
+    max-width: 400px;               /* same as email/password */
+    gap: 20px;                    /* space between first/last */
+}
+
+.name-input {
+    width: 100%;
+    max-width: 400px;      /* same width as name-row */
+    padding: 12px 14px;
+    margin: 10px auto;     /* centers them horizontally */
+    display: block;        /* required for auto margin to work */
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #0b0a0a;
+    background-color: #544d4d;
+    outline: none;
+    transition: border 0.2s ease, background-color 0.2s ease;
+    font-family: 'Karla';
+}
+
+.name-input:focus {
+    border-color: #000000;
+}
+
+.email-btn,
+.pws-btn {
+    opacity: 0.8;
+    box-sizing: border-box; /* includes padding & border in width */
+    width: 100%;
+    max-width: 400px;      /* same width as name-row */
+    padding: 12px 14px;
+    margin: 20px auto;     /* centers them horizontally */
+    display: block;        /* required for auto margin to work */
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #0f0e0e;
+    background-color: #544d4d;
+    outline: none;
+    transition: border 0.2s ease, background-color 0.2s ease;
+    font-family: 'Karla';
+    fill-opacity: 0.5
+}
+
+.signup-form button {
+    max-width: 400px;
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+input, button {
+    box-sizing: border-box;
+}

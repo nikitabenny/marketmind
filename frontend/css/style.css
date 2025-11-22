@@ -113,19 +113,38 @@ img{
     position: relative;
 }
 
+/* Add typing effect to hero heading */
 .hero-content h1 {
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
+    font-family: monospace;         /* gives typewriter look */
+    white-space: nowrap;             /* prevents wrapping */
+    overflow: hidden;                /* hides overflow text */
+    border-right: 3px solid #fff;   /* blinking cursor */
+    width: 0ch;                      /* start width at 0 */
+    animation: typing 3s steps(30) forwards, blink 0.5s step-end infinite alternate;
+}
+
+/* Typing animation */
+@keyframes typing {
+    from { width: 0ch; }
+    to { width: 30ch; } /* adjust to approx number of characters in your h1 */
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
 .hero-content p {
     font-size: 18px;
     margin-bottom: 30px;
-    max-width: 600px;
+    max-width: 750px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Karla'
 }
 
 .btn-hero {
@@ -143,3 +162,5 @@ img{
     background: #ffffff55;
 }
 
+
+/* HERO TEXT */
