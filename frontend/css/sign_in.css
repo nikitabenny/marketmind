@@ -32,9 +32,9 @@ a:hover {
     z-index: -1;       /* behind all content */
 }
 
-.signup-form input,
-.signup-form .email-btn,
-.signup-form .pws-btn {
+.signin-form input,
+.signin-form .email-btn,
+.signin-form .pws-btn {
     color: #fff; /* white text for readability */
     box-shadow: 0 4px 20px rgba(0,0,0,0.35);
 
@@ -138,7 +138,7 @@ a:hover {
 
 }
 
-.signup-form {
+.signin-form {
     width: 100%;
     max-width: 400px;
 }
@@ -164,7 +164,7 @@ a:hover {
     fill-opacity: 0.5
 }
 
-.signup-form button {
+.signin-form button {
     max-width: 400px;
     width: 100%;
     padding: 12px 14px;
