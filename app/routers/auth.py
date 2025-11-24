@@ -14,12 +14,24 @@ router = APIRouter(prefix="", tags=["auth"])
 class userOut(BaseModel):
     id: int
     email: str
-    password : str
     fullName : str
 
 
     class Config:
         orm_mode = True
+        extra = "ignore"
+
+
+class SignIn(BaseModel):
+    email_in: str
+    pword: str
+
+class SignUp(BaseModel):
+    email_in: str
+    pword: str
+    fName: str
+    lName: str
+
 
 def get_db():
     db = SessionLocal()
@@ -30,11 +42,11 @@ def get_db():
 
 
 @router.post("/signup", response_model=userOut)
-def add_user(email_in: str, fName: str, lName: str, pword: str, db: Session = Depends(get_db)):
-    pHash = hashlib.sha256(pword.encode("utf-8")).hexdigest()
-    fullName_in = fName + " " + lName
+def add_user(data: SignUp, db: Session = Depends(get_db)):
+    pHash = hashlib.sha256(data.pword.encode("utf-8")).hexdigest()
+    fullName_in = data.fName + " " + data.lName
 
-    new_user = User(email = email_in, password = pHash, fullName = fullName_in)
+    new_user = User(email = data.email_in, password = pHash, fullName = fullName_in)
     db.add(new_user)
 
     db.commit()
@@ -42,12 +54,11 @@ def add_user(email_in: str, fName: str, lName: str, pword: str, db: Session = De
 
     return new_user
 
-
 @router.post("/signin", response_model = userOut)
-def get_user(email_in: str, pword: str, db: Session = Depends(get_db)):
-    found_hash = hashlib.sha256(pword.encode("utf-8")).hexdigest()
+def get_user(data: SignIn, db: Session = Depends(get_db)):
+    found_hash = hashlib.sha256(data.pword.encode("utf-8")).hexdigest()
     user = db.query(User)\
-        .filter(User.email == email_in)\
+        .filter(User.email == data.email_in)\
         .filter(User.password == found_hash)\
         .first()
 
